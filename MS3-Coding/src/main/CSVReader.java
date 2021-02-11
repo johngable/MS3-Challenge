@@ -5,27 +5,35 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CSVReader {
 
-	public static void readCSV(String pathToCSV){
-		File csvFile = new File(pathToCSV);
+	private static String pathToCSV;
+
+	
+	public CSVReader(String pathToCSV) {
+		this.setPathToCSV(pathToCSV);
+	}
+
+	
+	public void readCSV(){
+		File csvFile = new File(getPathToCSV());
 		
 		if(csvFile.isFile()) {
 			try {
 				BufferedReader csvReader = new BufferedReader(new FileReader(csvFile));
 				
 				try {
-					String row;
+					SQLiteDB db = new SQLiteDB();
 					
 					List<List<String>> goodEntry = new ArrayList<List<String>>();
 					List<List<String>> badEntry = new ArrayList<List<String>>();
 
-					SQLiteDB db = new SQLiteDB();
-					
+					String row;
 					while((row = csvReader.readLine()) != null) {
 						String[] dataEntry = row.split(",");
 						if(dataEntry.length==11) {
@@ -42,7 +50,12 @@ public class CSVReader {
 					System.out.println(badEntry.size()+" Bad Entries");
 					System.out.println((goodEntry.size()+badEntry.size())+" Total Entries");
 
-					db.insertBatch(goodEntry);
+					try {
+						db.insertBatch(goodEntry);
+					} catch (SQLException e) {
+						System.out.println("Error handing off batch.");
+						e.printStackTrace();
+					}
 					
 					
 				} catch (IOException e) {
@@ -56,7 +69,14 @@ public class CSVReader {
 		}
 	}
 
-	public static void main(String[] args) {
-		readCSV("./../ms3Interview.csv");
+
+	public static String getPathToCSV() {
+		return pathToCSV;
 	}
+
+
+	public void setPathToCSV(String pathToCSV) {
+		this.pathToCSV = pathToCSV;
+	}
+
 }
