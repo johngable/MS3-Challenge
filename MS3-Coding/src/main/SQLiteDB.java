@@ -60,33 +60,6 @@ public class SQLiteDB {
 	}
 	
 	
-//	public String makeStatement(List<String> entry) {
-//		String sql = "INSERT INTO ms3Interview (A, B, C, D, E, F, G, H, I, J)"
-//				+ " VALUES(?,?,?,?,?,?,?,?,?,?);";
-//		
-//		try (Connection conn = DriverManager.getConnection(DBPath);
-//				PreparedStatement statement = conn.prepareStatement(sql);){
-//							statement.setString(0, entry.get(0));
-//							statement.setString(1, entry.get(1));
-//							statement.setString(2, entry.get(2));
-//							statement.setString(3, entry.get(3));
-//							statement.setString(4, entry.get(4));
-//							statement.setString(5, entry.get(5));
-//							statement.setString(6, entry.get(6));
-//							statement.setBoolean(7, Boolean.getBoolean(entry.get(8)));
-//							statement.setBoolean(8, Boolean.getBoolean(entry.get(9)));
-//							statement.setString(9, entry.get(10));
-//							
-//							statement.addBatch();
-//							
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//							
-//							
-//		
-//	}
-	
 	public void insertBatch(List<List<String>> goodEntry) throws SQLException {
 		String sql = "INSERT INTO ms3Interview (A, B, C, D, E, F, G, H, I, J)"
 				+ " VALUES(?,?,?,?,?,?,?,?,?,?);";
@@ -128,6 +101,7 @@ public class SQLiteDB {
 		}
 		
 	}
+	
 	
 	public void insertToDB(String a, String b, String c, String d, String e, String f, String g, Boolean h, Boolean i, String j) {
 

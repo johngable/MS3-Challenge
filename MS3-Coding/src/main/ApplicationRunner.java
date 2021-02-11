@@ -8,14 +8,15 @@ import java.util.Scanner;
 public class ApplicationRunner {
 
 	public static void main(String[] args) throws SQLException {
-		
+
 		System.out.println("Please enter the path to your CSV: ");
-		
+
 		Scanner sc = new Scanner(System.in);
 		String pathToCSV = sc.nextLine();
-		
-		CSVReader reader = new CSVReader(pathToCSV);
+
+		CSVHandler reader = new CSVHandler(pathToCSV);
 		reader.readCSV();
+		sc.close();
 
 	}
 
