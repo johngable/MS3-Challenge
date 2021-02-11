@@ -33,7 +33,7 @@ public class SQLiteDB {
 			
 			
 			Statement statement = conn.createStatement();
-			statement.executeQuery(sql);
+			statement.executeUpdate(sql);
 			System.out.println("Successfully created table.");
 			
 
@@ -78,7 +78,7 @@ public class SQLiteDB {
 					statement.setBoolean(9, i);
 					statement.setString(10, j);
 		
-					statement.executeUpdate();
+					System.out.println("Added " + statement.executeUpdate() +" row.");
 			
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
@@ -87,9 +87,10 @@ public class SQLiteDB {
 	
 	
 	public static void main(String[] args) {
-		//createDB();
-		//insertToDB("a", "b", "c", "d", "e", "f", "g", true, false, "j");
-		//dropTables();
+		dropTables();
+		createDB();
+		insertToDB("a", "b", "c", "d", "e", "f", "g", true, false, "j");
+		
 	}
 
 
