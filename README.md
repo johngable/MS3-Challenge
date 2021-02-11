@@ -12,7 +12,13 @@ inputted CSV file.
 Clone the repo preferably onto your desktop for ease of use. Open the project from Eclipse, and 
 build the project. SQLite executables are included within the repo (at the location your database will be made). 
 
-Allow the project to build in Eclipse. 
+
+### **IMPORTANT**
+* Right click the project from you project explorer and navigate to "Build Path -> Configure Build Path"
+* In the window that pops up, under Libraries click the JRE System Library
+  * An Edit Library window should appear and ensure that in the Alternate JRE field JAVA SE 13 is selected.
+
+
 
 Run the ApplicationRunner.java file, and input your CSV file relative pathing into the terminal  (./../input-file.csv).
 I found putting your csv in the outermost folder "MS3-Challenge" to be easiest (The emailed csv is included with the repo at this location just run
