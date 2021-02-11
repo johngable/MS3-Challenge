@@ -4,7 +4,7 @@ Coding challenge for MS3-Interview Application
 
 ## What does it do?
 
-The code initializes an SQLite DB within the repo folder and fill its with VALID data from a user
+The code initializes an SQLite DB within the repo folder and fills it with VALID data from a user
 inputted CSV file.
 
 ## How to setup and run
@@ -15,8 +15,8 @@ build the project. SQLite executables are included within the repo (at the locat
 
 ### **IMPORTANT**
 * Right click the project from you project explorer and navigate to "Build Path -> Configure Build Path"
-* In the window that pops up, under Libraries click the JRE System Library
-  * An Edit Library window should appear and ensure that in the Alternate JRE field JAVA SE 13 is selected.
+* In the window that pops up, under "Libraries" click the "JRE System Library"
+  * An "Edit Library" window should appear and ensure that in the Alternate JRE field "JAVA SE 13" is selected.
 
 
 
@@ -46,9 +46,9 @@ speed was optimal with one large batch, but if data entry grew larger the batch 
 
 ### Assumptions : 
 
-* The columns names and entry lengths will remain the same. Nothing was specified in the requirements so I left the columns static instead of dynamic per 
+* The column names and entry lengths will remain the same. Nothing was specified in the requirements so I left the columns static instead of dynamic per 
 csv.
 
 * CSV file sizes from user are not drastic enough to slow the program, if so batch sizes must be specified. 
 
-* I am also assuming that end users are somewhat familiar with pathing (specifically realtive pathing). It makes file reading much easier if so...
+* I am also assuming that end users are somewhat familiar with pathing (specifically realtive pathing) in order to allow the files to be found.
