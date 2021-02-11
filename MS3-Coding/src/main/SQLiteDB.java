@@ -5,20 +5,42 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is responsible for all interactions with the SQLite DB.
+ * 
+ * It can initialize a db, create a table, or delete a table using the file
+ * name.
+ * 
+ * All data entry is entered as a batch. (For future reference, batches can be
+ * divided up if time constraint not met)
+ * 
+ * @author johng
+ *
+ */
 public class SQLiteDB {
 
-	private static String fileName;
-	private static String DBPath;
+	private static String fileName; // File name from the csv file
+	private static String DBPath; // Required DB path for JDBC connections
 
+	/**
+	 * Constructor takes filename and builds the required jdbc pathing.
+	 * 
+	 * @param fileName
+	 */
 	public SQLiteDB(String fileName) {
-		this.fileName = fileName;
-		this.DBPath = "jdbc:sqlite:./" + fileName + ".db";
+		SQLiteDB.fileName = fileName;
+		SQLiteDB.DBPath = "jdbc:sqlite:./" + fileName + ".db";
 	}
 
+	/**
+	 * Initializes a database and table using the given file name
+	 * 
+	 * Requirements did not specify alternative columns headers etc. Stuck with
+	 * emailed data example headers.
+	 * 
+	 */
 	protected static void createDB() {
 
 		try {
@@ -35,10 +57,14 @@ public class SQLiteDB {
 			System.out.println("Successfully created table.");
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Error initializing database and/or table: " + e.getMessage());
 		}
 	}
 
+	/**
+	 * Drops table if it exists (the table name should also match the file name if
+	 * built from this class)
+	 */
 	protected void dropTable() {
 		String sql = "DROP TABLE IF EXISTS '" + fileName + "';";
 
@@ -53,7 +79,14 @@ public class SQLiteDB {
 		}
 	}
 
-	protected void insertBatch(List<List<String>> goodEntry) throws SQLException {
+	/**
+	 * Inserts string lists as batch for time constraints. Currently one batch
+	 * sufficed for given example. Groups of batches can be added later for larger
+	 * data sets if needed.
+	 * 
+	 * @param goodEntry - String list of valid entries parsed from the CSV Handler
+	 */
+	protected void insertBatch(List<List<String>> goodEntry) {
 
 		createDB();
 
@@ -94,32 +127,6 @@ public class SQLiteDB {
 			e.printStackTrace();
 		}
 
-	}
-
-	protected void insertToDB(String a, String b, String c, String d, String e, String f, String g, Boolean h, Boolean i,
-			String j) {
-
-		String sql = "INSERT INTO ms3Interview (A, B, C, D, E, F, G, H, I, J)" + " VALUES(?,?,?,?,?,?,?,?,?,?);";
-
-		try (Connection conn = DriverManager.getConnection(DBPath);
-				PreparedStatement statement = conn.prepareStatement(sql);) {
-
-			statement.setString(1, a);
-			statement.setString(2, b);
-			statement.setString(3, c);
-			statement.setString(4, d);
-			statement.setString(5, e);
-			statement.setString(6, f);
-			statement.setString(7, g);
-			statement.setBoolean(8, h);
-			statement.setBoolean(9, i);
-			statement.setString(10, j);
-
-			statement.executeUpdate();
-
-		} catch (SQLException exception) {
-			System.out.println(exception.getMessage());
-		}
 	}
 
 }

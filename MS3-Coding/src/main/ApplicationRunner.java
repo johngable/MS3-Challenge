@@ -5,47 +5,48 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main runner for users.
+ * 
+ * Prompts user for choice of new or additional entries and a path for a csv or
+ * if the user would like to drop tables using a file name (which should match
+ * the table if made by this program).
+ * 
+ * @author johng
+ *
+ */
 public class ApplicationRunner {
 
 	public static void main(String[] args) throws SQLException {
 
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.println("Select an option: ");
 		System.out.println("1: Enter new or additional data using a CSV.");
 		System.out.println("2: Drop existing table.");
 
-
 		int choice = Integer.parseInt(sc.nextLine());
-		
-		if(choice == 1) {
+
+		if (choice == 1) {
 			System.out.print("Please enter the path to your CSV: ");
-			
-			if(sc.hasNext()) {
+
+			if (sc.hasNext()) {
 				String pathToCSV = sc.nextLine();
 				CSVHandler reader = new CSVHandler(pathToCSV);
 				reader.readCSV();
-				
+
 			}
-			
+
 			sc.close();
-		}
-		else {
+		} else {
 			System.out.println("Please enter the name of the Table to drop (usually name of csv file): ");
-			if(sc.hasNext()) {
+			if (sc.hasNext()) {
 				String tableToDrop = sc.nextLine();
 				SQLiteDB db = new SQLiteDB(tableToDrop);
 				db.dropTable();
 				sc.close();
 			}
 		}
-		
-
-		
-		
-
-		
-		
 
 	}
 
