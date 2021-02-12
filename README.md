@@ -38,8 +38,9 @@ This is a CSV file of records that were incomplete and not able to be entered in
 
 ### Design : 
 
-The design is pretty simple. I created one main class to facilitate user input, one to handle CSVs, and one to interact with the DB.
-The most challenging step was getting SQL Jar into the class path correctly, I think the repo and its sources are a little outdated.
+The design is pretty simple. I took the common 3 layered architecture for an application and just trimmed off the fat. There are 3 classes, one to facilitate all interactions with the user (presentation layer), one to facilitate businiess logic for handling CSVs (application layer), and one to facilitate all database interactions (data layer).
+
+In all honesty, I wasn't sure how rounded to design the application. If it was to be a full fledged application, I would most likely add a java swing front end to replace the CLI, command interface with commands to bridge the gap between presentation and applpication layer, as well as table/row gateways for the table. This is commonly what I do when creating java based applications, but again I wasn't exactly sure if thats what was being desired from the documents I was given.
 
 To keep database commits to a minimum (for times sake), I added each entry to a batch of prepared statements. I noted in javadocs that the 
 speed was optimal with one large batch, but if data entry grew larger the batch should be broken down as well. 
